@@ -8,14 +8,14 @@ const endId = 10;
 var i = 0;
 
 for(i = startId;i <= endId;i++){
-        let httpUrl = 'https://bbs-api.mihoyo.com/post/wapi/getPostReplies?gids=2&is_hot=true&last_id=' + (i*20+20).toString() + '&post_id=1958320&size=20'
+        let httpUrl = 'https://bbs-api.mihoyo.com/post/wapi/getPostReplies?gids=2&is_hot=false&last_id=' + (i*20+20).toString() + '&order_type=1&post_id=1958320&size=20'
         axios.get(httpUrl).then((res)=>{
-                var str = JSON.stringify(res.data);
-                fs.writeFile('/home/nodeJs/' + i.toString() + '.json',res.data,{flag:"w",encoding:"utf-8"},function(err){
+                let str = JSON.stringify(res.data);
+                fs.writeFile('/home/nodeJs/genshin_' + res.data.data.list[0].reply.reply_id.toString() + '.json',str,{flag:"w",encoding:"utf-8"},function(err){
                         if(err){
                                 console.log("chucuo")
                         }else{
-                                console.log("success!")
+                                console.log("success!" + res.data.data.list[0].reply.reply_id.toString())
                         }
                 })
         })
@@ -26,16 +26,14 @@ for(i = startId;i <= endId;i++){
 
 
 
-
 /*
 let httpUrl = "https://bbs-api.mihoyo.com/post/wapi/getPostReplies?gids=2&is_hot=true&last_id=20&post_id=1958320&size=20"
 axios.get(httpUrl).then((res)=>{
-        var str = JSON.stringify(res.data);
-        fs.writeFile('res.data')
+        var id = (res.data.data.list[0].reply.uid);
+        console.log(id.toString())
 })
+
 */
-
-
 
 /**
  * var http = require('http');
