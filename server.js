@@ -1,22 +1,39 @@
 //const cheerio = require("cheerio");
-const axios = require('axios')
+const axios = require('axios');
+var fs = require('fs');
 
+//Id是0的时候url中取到20
+const startId = 0;
+const endId = 10;
+var i = 0;
+
+for(i = startId;i <= endId;i++){
+        let httpUrl = 'https://bbs-api.mihoyo.com/post/wapi/getPostReplies?gids=2&is_hot=true&last_id=' + (i*20+20).toString() + '&post_id=1958320&size=20'
+        axios.get(httpUrl).then((res)=>{
+                var str = JSON.stringify(res.data);
+                fs.writeFile('/home/nodeJs/' + i.toString() + '.json',res.data,{flag:"w",encoding:"utf-8"},function(err){
+                        if(err){
+                                console.log("chucuo")
+                        }else{
+                                console.log("success!")
+                        }
+                })
+        })
+}
+
+
+
+
+
+
+
+/*
 let httpUrl = "https://bbs-api.mihoyo.com/post/wapi/getPostReplies?gids=2&is_hot=true&last_id=20&post_id=1958320&size=20"
 axios.get(httpUrl).then((res)=>{
-        console.log(JSON.stringify(res.data))
+        var str = JSON.stringify(res.data);
+        fs.writeFile('res.data')
 })
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 
 
