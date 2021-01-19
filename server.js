@@ -10,8 +10,15 @@ var i = 0;
 for(i = startId;i <= endId;i++){
         let httpUrl = 'https://bbs-api.mihoyo.com/post/wapi/getPostReplies?gids=2&is_hot=false&last_id=' + (i*20+20).toString() + '&order_type=1&post_id=1958320&size=20'
         axios.get(httpUrl).then((res)=>{
-                let str = JSON.stringify(res.data);
-                fs.writeFile('/home/nodeJs/genshin_' + res.data.data.list[0].reply.reply_id.toString() + '.json',str,{flag:"w",encoding:"utf-8"},function(err){
+                let j = 0;
+                let str = '';
+                for(j = 0;j<20;j++){
+                        if(res.data.data.list[j].reply.content.indexOf("101898897") != -1){
+                                console.log(res.data.data.list[0].reply.uid.toString())
+                        }
+                        str = str + res.data.data.list[0].reply.uid.toString() +':' +res.data.data.list[0].reply.content + ' \n '
+                }
+                fs.writeFile('/home/nodeJs/test1/genshin_' + res.data.data.list[0].reply.reply_id.toString() + '.json',str,{flag:"w",encoding:"utf-8"},function(err){
                         if(err){
                                 console.log("chucuo")
                         }else{
