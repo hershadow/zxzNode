@@ -19,5 +19,7 @@
     "url": "https://github.com/hershadow/zxzNode/issues"
   },
   "homepage": "https://github.com/hershadow/zxzNode#readme",
-  "dependencies": {}
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }

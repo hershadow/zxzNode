@@ -3,7 +3,7 @@ const axios = require('axios')
 
 let httpUrl = "https://bbs-api.mihoyo.com/post/wapi/getPostReplies?gids=2&is_hot=true&last_id=20&post_id=1958320&size=20"
 axios.get(httpUrl).then((res)=>{
-        console.log(res)
+        console.log(JSON.stringify(res.data))
 })
 
 
